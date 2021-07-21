@@ -12,12 +12,12 @@ namespace SistemaVacina
         struct Usuario
         {
             public string nome;
+            public string sobrenome;
             public string rg;
             public string cep;
             public string numCell;
 
         }
-
         static List<Usuario> usuarios = new List<Usuario>();
         static Random rnd = new Random();
 
@@ -25,7 +25,8 @@ namespace SistemaVacina
         static void Main(string[] args)
         {
             Console.WriteLine("Sistema iniciado...");
-             Token();
+            Menu();
+
         }
 
         static void Menu()
@@ -34,8 +35,11 @@ namespace SistemaVacina
             Usuario usuario = new Usuario();
             Console.WriteLine("Cadastro de Usuário");
 
-            Console.WriteLine("Informe o seu nome Completo:");
+            Console.WriteLine("Informe o seu Primeiro Nome:");
             usuario.nome = Console.ReadLine();
+
+            Console.WriteLine("Informe o seu Sobrenome:");
+            usuario.sobrenome = Console.ReadLine();
 
             Console.WriteLine("Informe seu RG:");
             usuario.rg = Console.ReadLine();
@@ -47,26 +51,56 @@ namespace SistemaVacina
             usuario.numCell = Console.ReadLine();
 
             usuarios.Add(usuario);
+
+            Console.WriteLine("Cadastro concluido com Sucesso");
+            ValidacaoToken();
+
         }
 
-        static void Token()
+        static int Token()
         {
-            
+
             int token = rnd.Next(1000, 9999);
-            Console.Write(token);
+            Console.WriteLine($"Seu Token é {token}");
+            return token;
 
         }
 
         static void ValidacaoToken()
         {
+            int tokenPass = Token();
+            Console.WriteLine($"\nInforme o Token: ");
+            int ValidationTokenUser = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Informe o Token: ");
-            string ValidationTokenUser = Console.ReadLine();
-
-            if (ValidationTokenUser == Token.token){
+            if (ValidationTokenUser == tokenPass)
+            {
+                ConfirmCont();
 
             }
+            else
+            {
+                Console.WriteLine("Token Incorreto");
+            }
 
+        }
+
+        static void ConfirmCont()
+        {
+
+            Console.WriteLine("Token Validado com Sucesso\n");
+            foreach (Usuario usuario in usuarios)
+            {
+                
+                Console.WriteLine($"=========================================\n");
+                Console.WriteLine($"Seja bem vindo(a): {usuario.nome}");
+                Console.WriteLine("Confirme seus Dados!");
+                Console.WriteLine($"Nome Completo: {usuario.nome} {usuario.sobrenome}");
+                Console.WriteLine($"RG: {usuario.rg}");
+                Console.WriteLine($"CEP: {usuario.cep}");
+                Console.WriteLine($"Celular: {usuario.numCell}");
+                Console.WriteLine($"=========================================\n");
+
+            }
         }
 
     }
