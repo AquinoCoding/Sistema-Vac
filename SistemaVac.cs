@@ -100,6 +100,16 @@ namespace SistemaVacina
                 Console.WriteLine($"Celular: {usuario.numCell}");
                 Console.WriteLine($"=========================================\n");
 
+                Console.WriteLine("Seus dados estão corretos [SIM - 1/NÃO - 2]");
+                string dec = Console.ReadLine();
+
+                if (dec == "1" || dec == "NÃO"){
+                    Console.WriteLine("DIAS DISPONIVEIS");
+                }
+                else{
+                    Console.WriteLine("Editar cadastro");
+                }
+
             }
         }
 
